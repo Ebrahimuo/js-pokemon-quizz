@@ -72,6 +72,7 @@ let questionNumber = 0;
 let trackingQuestion= 0;
 let score = 0;
 let previousAnswer="";
+let finished=false;
 
 /*-----     CACHE  -----*/
 
@@ -79,19 +80,50 @@ let questionCount = document.getElementById("questionN");
 let questionSlot = document.getElementById("questionSlot");
 
 
-
+let radioWrap = document.getElementById("radioWrap");
 
 let radioBtns = document.querySelectorAll(".form-check-label");
 const formInputs = document.querySelectorAll("form-check-input");
 
-
-
+let prevButton = document.getElementById("prevButton");
+let proceedButton = document.getElementById("proceedButton");
 
 /*-------------- FUNCTIONS -------------*/
 
 
 function init(event){
     event.preventDefault();
+    if(finished&& event.submitter.id=="prevButton"){       //RESTART IS PRESSED
+        newGame=true;
+        questionNumber = 0;
+        trackingQuestion= 0;
+        score = 0;
+        previousAnswer="";
+        finished=false;
+
+        questionCount.innerText=1;
+        questionSlot.innerText= questionsQuiz1[questionNumber].question;
+
+        j=Math.floor(Math.random() * 4); 
+            for(let i=0; i<4;i++){
+                
+                if(i!=3){
+                    radioBtns[j%4].innerText=questionsQuiz1[questionNumber].options[i];
+                    j++;
+                    console.log("Branch 1");
+                    
+                } else {
+                    radioBtns[j%4].innerText=questionsQuiz1[questionNumber].answer;
+                    console.log("Branch 2");
+                    j++;
+           }
+      } 
+            questionNumber++;
+            radioWrap.style.display="block";
+            prevButton.innerText="Previous!";
+            finished=false;
+            proceedButton.innerText="Next";
+    }
     if(event.submitter.id=="prevButton"){ // RUN ONLY ON PREVIOUS BUTTON
         console.log("Inside prevButton submitter");
         if (previousAnswer==questionsQuiz1[questionNumber].answer){
@@ -122,11 +154,18 @@ function init(event){
     } else {                    //NEXT BUTTON PRESS
         console.log(questionNumber);
         console.log(questionsQuiz1.length);
-        if(questionNumber==(questionsQuiz1.length-1)){                          //END
+        if(questionNumber==(questionsQuiz1.length-1)){                          //END END END
             console.log("NO NEXT?")
             questionCount.innerText="---------";
-            questionSlot.innerText="Final score is: " + score;
+            questionSlot.innerText="Your final score is: " + score + " out of 10";
             questionNumber++;
+            radioWrap.style.display="none";
+            prevButton.innerText="Restart!";
+            prevButton.formTarget ="./index.html"
+            finished=true;
+            console.log(prevButton);
+            proceedButton.innerText="Try Quiz 2?";
+            
         } else if( questionNumber<(questionsQuiz1.length-1)){                                                        //OTHERWISE NOT END
 
         
@@ -179,7 +218,7 @@ function init(event){
     log.innerText = score;
 
     console.log(score);
-    event.preventDefault();
+    // event.preventDefault();
 }
 else {
     //what to do if done?
