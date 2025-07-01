@@ -67,8 +67,50 @@ const questionsQuiz2=[{question: "What was the first Pokémon ever created?",
 
 /*---------- Variables (state) ---------*/
 
+let newGame=true;
+
+let questionNumber = 0;
+
+let trackingQuestion= 0; // the question the computer is at;
+
+let score = 0;
 
 /*----- Cached Element References  -----*/
 
+let questionCount = document.getElementById("questionN");
+
+let questionSlot = document.getElementById("questionSlot");
+
+let proceedBtn = document.getElementById("proceedButton");
+
+proceedBtn.addEventListener('click', init)
+
+//radio elements;
+
+let radioBtns = document.querySelectorAll(".form-check-label");
+
 
 /*-------------- Functions -------------*/
+
+
+function init(event){
+
+    // if quizz 1
+    //update everything
+    //make a switch case for question count:
+
+    questionNumber++;
+    questionCount.innerText=questionNumber;
+
+    questionSlot.innerText = questionsQuiz1[questionNumber].question;
+
+    console.log(radioBtns);
+
+    j=Math.floor(Math.random() * 3); 
+    for(let i=0; i<3;i++){
+        radioBtns[j%3].innerText=questionsQuiz1[questionNumber].options[i];
+        j++;
+    }
+
+
+}
