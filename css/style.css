@@ -1,0 +1,13 @@
+h1 {
+    text-align: center;
+    margin-top: 40px;
+}
+
+#quizLayout {
+    display: flex;
+    flex-direction: flex-end;
+    justify-content: center;
+    margin-top: 70px;
+}
+
+.navbar-brand{}
