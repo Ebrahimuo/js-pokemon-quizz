@@ -38,9 +38,9 @@
   <div class="card-header" >
     
   </div>
-  <div class="card-body">
-    <h5 class="card-title" id="questionN">Special title treatment</h5>
-    <p class="card-text" id="questionSlot">With supporting text below as a natural lead-in to additional content.</p>
+  <div class="card-body" id="questionField">
+    <h5 class="card-title" id="questionN">Question Number</h5>
+    <p class="card-text" id="questionSlot">The question is: </p>
     <!-- <a href="#" class="btn btn-primary" id="proceedButton">Go somewhere</a> -->
 
 
@@ -48,7 +48,7 @@
 <form>
   <fieldset class="form-group">
     <div class="row">
-      <legend class="col-form-label col-sm-2 pt-0">Radios</legend>
+      <legend class="col-form-label col-sm-3 pt-0">Answer:</legend>
       <div class="col-sm-10">
         <div class="form-check">
           <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
@@ -65,7 +65,13 @@
         <div class="form-check disabled">
           <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3" >
           <label class="form-check-label" for="gridRadios3">
-            Third disabled radio
+            Third radio
+          </label>
+        </div>
+        <div class="form-check disabled">
+          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios4" value="option4" >
+          <label class="form-check-label" for="gridRadios4">
+            Fourth radio
           </label>
         </div>
       </div>
@@ -73,11 +79,13 @@
   </fieldset>
   <div class="form-group row">
     <div class="col-sm-10">
-        <button type="submit" class="btn btn-primary" id="prevButton"> Previous</button>
-      <button type="submit" class="btn btn-primary" id="proceedButton"> Next</button>
+        <button type="submit" class="btn btn-primary" id="prevButton" > Previous</button>
+      <button type="submit" class="btn btn-primary" id="proceedButton" > Next</button>
     </div>
   </div>
 </form>
+<pre id="log"></pre>
+
 </div>
 </div>
         </div>
