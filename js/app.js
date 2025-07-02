@@ -295,7 +295,8 @@ toggleBtn.addEventListener('click', toggleD);
 function toggleD() {
   var element = document.body;
   element.classList.toggle("dark-mode");
-  if(){
+  if(document.getElementsByClassName("navbar")[0].style.backgroundColor=="white"){
+    console.log("inside if");
     document.getElementsByClassName("navbar")[0].style.setProperty('background-color', 'black', 'important');
     document.getElementsByTagName("a")[0].style.setProperty('color', 'white', 'important');
     document.getElementsByTagName("a")[1].style.setProperty('color', 'white', 'important');
@@ -310,6 +311,22 @@ function toggleD() {
 
     document.getElementById("prevButton").style.setProperty('color', 'white', 'important');
     document.getElementById("prevButton").style.setProperty('background-color', "grey", 'important');
+    document.getElementById("prevButton").style.setProperty('border', "1px black solid", 'important');
+  } else {
+    document.getElementsByClassName("navbar")[0].style.setProperty('background-color', 'black', 'important');
+    document.getElementsByTagName("a")[0].style.setProperty('color', 'black', 'important');
+    document.getElementsByTagName("a")[1].style.setProperty('color', 'black', 'important');
+    document.getElementsByTagName("a")[2].style.setProperty('color', 'black', 'important');
+    document.getElementsByTagName("a")[3].style.setProperty('color', 'black', 'important');
+    document.getElementsByClassName("card-body")[0].style.setProperty('background-color', 'white', 'important');
+    // document.getElementsByClassName("card-body")[1].style.setProperty('background-color', 'grey', 'important');
+
+    document.getElementById("proceedButton").style.setProperty('color', 'black', 'important');
+    document.getElementById("proceedButton").style.setProperty('background-color', "white", 'important');
+    document.getElementById("proceedButton").style.setProperty('border', "1px black solid", 'important');
+
+    document.getElementById("prevButton").style.setProperty('color', 'black', 'important');
+    document.getElementById("prevButton").style.setProperty('background-color', "white", 'important');
     document.getElementById("prevButton").style.setProperty('border', "1px black solid", 'important');
   }
 }
@@ -331,20 +348,3 @@ function toggleD() {
 //         document.getElementById("theme_change").innerText = "Dark Theme";
 
 // }
-
-
-document.getElementsByClassName("navbar")[0].style.setProperty('background-color', 'black', 'important');
-document.getElementsByTagName("a")[0].style.setProperty('color', 'white', 'important');
-document.getElementsByTagName("a")[1].style.setProperty('color', 'white', 'important');
-document.getElementsByTagName("a")[2].style.setProperty('color', 'white', 'important');
-document.getElementsByTagName("a")[3].style.setProperty('color', 'white', 'important');
-document.getElementsByClassName("card-body")[0].style.setProperty('background-color', 'grey', 'important');
-// document.getElementsByClassName("card-body")[1].style.setProperty('background-color', 'grey', 'important');
-
-document.getElementById("proceedButton").style.setProperty('color', 'white', 'important');
-document.getElementById("proceedButton").style.setProperty('background-color', "grey", 'important');
-document.getElementById("proceedButton").style.setProperty('border', "1px black solid", 'important');
-
-document.getElementById("prevButton").style.setProperty('color', 'white', 'important');
-document.getElementById("prevButton").style.setProperty('background-color', "grey", 'important');
-document.getElementById("prevButton").style.setProperty('border', "1px black solid", 'important');
