@@ -75,7 +75,7 @@ let previousAnswer="";
 let finished=false;
 
 var questionsArr = [];
-
+var tryQuiz=0;
 
 const nextAudio = document.getElementById("nextAudio");
 const prevAudio = document.getElementById("prevAudio");
@@ -113,7 +113,7 @@ function init(event){
     //     let questionsArr = que
     // }
 
-    if(finished&& event.submitter.id=="prevButton"){       //RESTART IS PRESSED
+    if(finished&& event.submitter.id=="prevButton"){           //RESTART IS PRESSED
         //no audio to play here
         newGame=true;
         questionNumber = 0;
@@ -144,7 +144,7 @@ function init(event){
             prevButton.innerText="Previous!";
             finished=false;
             proceedButton.innerText="Next";
-    }
+
     if(event.submitter.id=="prevButton"){ // RUN ONLY ON PREVIOUS BUTTON
         prevAudio.play();
         console.log("Inside prevButton submitter");
@@ -173,8 +173,15 @@ function init(event){
         console.log(score);
     }
         
-    } else {                    //NEXT BUTTON PRESS
+    } }
+    
+    else if(finished && event.submitter.id=="proceedButton") {
+        //redirect page  
+        window.location.href = `quiz${tryQuiz}.html`;
+
+    } else {//NEXT BUTTON PRESS
         
+
         console.log(questionNumber);
         console.log(questionsArr.length);
         if(questionNumber==(questionsArr.length-1)){                          //END END END
@@ -192,10 +199,12 @@ function init(event){
             answerText.innerText="";
             radioWrap.style.display="none";
             prevButton.innerText="Restart!";
-            prevButton.formTarget ="./index.html"
+            //not quite the
             finished=true;
             console.log(prevButton);
-            proceedButton.innerText="Try Quiz 2?";
+            console.log("HERE");
+            proceedButton.innerText=`Try Quizz${tryQuiz}?`;
+            console.log(`/quiz${tryQuiz}.html`);
             
         } else if( questionNumber<(questionsArr.length-1)){                                                        //OTHERWISE NOT END
             nextAudio.play();
@@ -245,19 +254,22 @@ function init(event){
 
     
 
+            }
+            // log.innerText = score;
+
+            console.log(score);
+            // event.preventDefault();
+        }
+        else {
+                console.log("For some reason here?");
+            //what to do if done?
+            radioBtns[j%4].innerText=questionsQuiz1[questionNumber].answer;
+
+        }
+
     }
-    // log.innerText = score;
+}
 
-    console.log(score);
-    // event.preventDefault();
-}
-else {
-    //what to do if done?
-     radioBtns[j%4].innerText=questionsQuiz1[questionNumber].answer;
-
-}
-}
-}
 
 
 
@@ -293,8 +305,10 @@ window.onload = function() {
     
     if (window.location.pathname === "/quiz1.html") {
         questionsArr = questionsQuiz1;
+        tryQuiz=2;
     } else if (window.location.pathname === "/quiz2.html") {
         questionsArr = questionsQuiz2;
+        tryQuiz=1;
     }
         console.log(questionsArr);
         // Your JavaScript code to execute on this specific page
@@ -322,6 +336,3 @@ window.onload = function() {
 
 
 
-
-
-//shuffle variables only once at the beginning: saving a state
