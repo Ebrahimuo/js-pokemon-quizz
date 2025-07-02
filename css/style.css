@@ -1,3 +1,8 @@
+a{
+    background-color: black !;
+}
+
+
 
 h1 {
     text-align: center;
@@ -51,5 +56,7 @@ h1 {
 
 .dark-mode {
   background-color: black;
-  color: grey;
+  color: white;
 }
+
+

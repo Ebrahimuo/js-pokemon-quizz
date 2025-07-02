@@ -218,7 +218,9 @@ function init(event){
 const form = document.querySelector("form");
 const log = document.querySelector("#log");
 
-form.addEventListener("submit", init,  false,);
+if(window.location.pathname !== "/index.html") {
+form.addEventListener("submit", init,  false);
+}
 
 // ON LOAD INITIALIZATION
 
@@ -293,4 +295,56 @@ toggleBtn.addEventListener('click', toggleD);
 function toggleD() {
   var element = document.body;
   element.classList.toggle("dark-mode");
+  if(){
+    document.getElementsByClassName("navbar")[0].style.setProperty('background-color', 'black', 'important');
+    document.getElementsByTagName("a")[0].style.setProperty('color', 'white', 'important');
+    document.getElementsByTagName("a")[1].style.setProperty('color', 'white', 'important');
+    document.getElementsByTagName("a")[2].style.setProperty('color', 'white', 'important');
+    document.getElementsByTagName("a")[3].style.setProperty('color', 'white', 'important');
+    document.getElementsByClassName("card-body")[0].style.setProperty('background-color', 'grey', 'important');
+    // document.getElementsByClassName("card-body")[1].style.setProperty('background-color', 'grey', 'important');
+
+    document.getElementById("proceedButton").style.setProperty('color', 'white', 'important');
+    document.getElementById("proceedButton").style.setProperty('background-color', "grey", 'important');
+    document.getElementById("proceedButton").style.setProperty('border', "1px black solid", 'important');
+
+    document.getElementById("prevButton").style.setProperty('color', 'white', 'important');
+    document.getElementById("prevButton").style.setProperty('background-color', "grey", 'important');
+    document.getElementById("prevButton").style.setProperty('border', "1px black solid", 'important');
+  }
 }
+
+// document.getElementById("theme_change").onclick = function () {
+// if (document.body.style.backgroundColor == "#000") {
+//         document.body.style.backgroundColor = "#f5deb3";
+//         document.getElementsByTagName("a")[0].style.color = "#000";
+//         document.getElementsByTagName("a")[0].style.borderColor = "#000";
+//         document.getElementsByTagName("a")[1].style.color = "#000";
+//         document.getElementsByTagName("a")[1].style.borderColor = "#000";
+//         document.getElementById("theme_change").innerText = "Light Theme";
+//     } else if (document.body.style.backgroundColor = "#f5deb3") {
+//         document.body.style.backgroundColor == "#000";
+//         document.getElementsByTagName("a")[0].style.color = "#f5deb3";
+//         document.getElementsByTagName("a")[0].style.borderColor = "#f5deb3";
+//         document.getElementsByTagName("a")[1].style.color = "#f5deb3";
+//         document.getElementsByTagName("a")[1].style.borderColor = "#f5deb3";
+//         document.getElementById("theme_change").innerText = "Dark Theme";
+
+// }
+
+
+document.getElementsByClassName("navbar")[0].style.setProperty('background-color', 'black', 'important');
+document.getElementsByTagName("a")[0].style.setProperty('color', 'white', 'important');
+document.getElementsByTagName("a")[1].style.setProperty('color', 'white', 'important');
+document.getElementsByTagName("a")[2].style.setProperty('color', 'white', 'important');
+document.getElementsByTagName("a")[3].style.setProperty('color', 'white', 'important');
+document.getElementsByClassName("card-body")[0].style.setProperty('background-color', 'grey', 'important');
+// document.getElementsByClassName("card-body")[1].style.setProperty('background-color', 'grey', 'important');
+
+document.getElementById("proceedButton").style.setProperty('color', 'white', 'important');
+document.getElementById("proceedButton").style.setProperty('background-color', "grey", 'important');
+document.getElementById("proceedButton").style.setProperty('border', "1px black solid", 'important');
+
+document.getElementById("prevButton").style.setProperty('color', 'white', 'important');
+document.getElementById("prevButton").style.setProperty('background-color', "grey", 'important');
+document.getElementById("prevButton").style.setProperty('border', "1px black solid", 'important');
