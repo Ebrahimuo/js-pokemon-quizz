@@ -39,3 +39,17 @@ h1 {
     
 }
 
+.hidden {
+    opacity:0;
+    
+}
+
+.visible {
+    opacity:1;
+    transition: opacity 1s ease-in;
+}
+
+.dark-mode {
+  background-color: black;
+  color: grey;
+}
