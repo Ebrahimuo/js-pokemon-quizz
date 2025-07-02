@@ -74,6 +74,15 @@ let score = 0;
 let previousAnswer="";
 let finished=false;
 
+var questionsArr = [];
+
+
+const nextAudio = document.getElementById("nextAudio");
+const prevAudio = document.getElementById("prevAudio");
+const failAudio = document.getElementById("failAudio");
+const successAudio = document.getElementById("successAudio");
+const mediumAudio = document.getElementById("mediumAudio");
+
 /*-----     CACHE  -----*/
 
 let questionCount = document.getElementById("questionN");
@@ -88,12 +97,24 @@ const formInputs = document.querySelectorAll("form-check-input");
 let prevButton = document.getElementById("prevButton");
 let proceedButton = document.getElementById("proceedButton");
 
+
+let answerText = document.getElementById("answerText");
+
+
 /*-------------- FUNCTIONS -------------*/
 
 
 function init(event){
-    event.preventDefault();
+    event.preventDefault(); //allows the final page
+
+    // if window.location.pathname is quizz1 get from questionQuiz1,
+
+    // if(window.location.pathname=== "/quiz1.html"){
+    //     let questionsArr = que
+    // }
+
     if(finished&& event.submitter.id=="prevButton"){       //RESTART IS PRESSED
+        //no audio to play here
         newGame=true;
         questionNumber = 0;
         trackingQuestion= 0;
@@ -101,19 +122,19 @@ function init(event){
         previousAnswer="";
         finished=false;
 
-        questionCount.innerText=1;
-        questionSlot.innerText= questionsQuiz1[questionNumber].question;
+        questionCount.innerText="#1";
+        questionSlot.innerText= questionsArr[questionNumber].question;
 
         j=Math.floor(Math.random() * 4); 
             for(let i=0; i<4;i++){
                 
                 if(i!=3){
-                    radioBtns[j%4].innerText=questionsQuiz1[questionNumber].options[i];
+                    radioBtns[j%4].innerText=questionsArr[questionNumber].options[i];
                     j++;
                     console.log("Branch 1");
                     
                 } else {
-                    radioBtns[j%4].innerText=questionsQuiz1[questionNumber].answer;
+                    radioBtns[j%4].innerText=questionsArr[questionNumber].answer;
                     console.log("Branch 2");
                     j++;
            }
@@ -125,40 +146,50 @@ function init(event){
             proceedButton.innerText="Next";
     }
     if(event.submitter.id=="prevButton"){ // RUN ONLY ON PREVIOUS BUTTON
+        prevAudio.play();
         console.log("Inside prevButton submitter");
-        if (previousAnswer==questionsQuiz1[questionNumber].answer){
+        if (previousAnswer==questionsArr[questionNumber].answer){
             score--;
             previousAnswer="";
             console.log("New score after decrementing is: " + score);
         }
         questionNumber--;
-        questionCount.innerText=questionNumber+1;
+        questionCount.innerText="#"+ (questionNumber+1) ;
         
-         questionSlot.innerText = questionsQuiz1[questionNumber].question;
+         questionSlot.innerText = questionsArr[questionNumber].question;
          for(let i=0; i<4;i++){
         
         if(i!=3){
-            radioBtns[j%4].innerText=questionsQuiz1[questionNumber].options[i];
+            radioBtns[j%4].innerText=questionsArr[questionNumber].options[i];
             j++;
             console.log("Branch 1");
             
         } else {
-            radioBtns[j%4].innerText=questionsQuiz1[questionNumber].answer;
+            radioBtns[j%4].innerText=questionsArr[questionNumber].answer;
               console.log("Branch 2");
             j++;
            }
-        log.innerText = score;
+        // log.innerText = score;
         console.log(score);
     }
         
     } else {                    //NEXT BUTTON PRESS
+        
         console.log(questionNumber);
-        console.log(questionsQuiz1.length);
-        if(questionNumber==(questionsQuiz1.length-1)){                          //END END END
+        console.log(questionsArr.length);
+        if(questionNumber==(questionsArr.length-1)){                          //END END END
             console.log("NO NEXT?")
-            questionCount.innerText="---------";
+            questionCount.innerText="----E N D-----";
+            if(score>7){
+                successAudio.play();
+            } else if (score >3) {
+                mediumAudio.play();
+            } else {
+                failAudio.play();
+            }
             questionSlot.innerText="Your final score is: " + score + " out of 10";
             questionNumber++;
+            answerText.innerText="";
             radioWrap.style.display="none";
             prevButton.innerText="Restart!";
             prevButton.formTarget ="./index.html"
@@ -166,8 +197,8 @@ function init(event){
             console.log(prevButton);
             proceedButton.innerText="Try Quiz 2?";
             
-        } else if( questionNumber<(questionsQuiz1.length-1)){                                                        //OTHERWISE NOT END
-
+        } else if( questionNumber<(questionsArr.length-1)){                                                        //OTHERWISE NOT END
+            nextAudio.play();
         
 
         //GET THE INDEX OF PRESSED RADIO BUTTON
@@ -176,33 +207,33 @@ function init(event){
         let output = "";
         for (const entry of data) {
             console.log(radioBtns[entry[1].match(/(\d+)/)[0]-1].innerText);
-            console.log(questionsQuiz1[questionNumber].answer);
-        if(radioBtns[entry[1].match(/(\d+)/)[0]-1].innerText==questionsQuiz1[questionNumber].answer){
-            previousAnswer=questionsQuiz1[questionNumber].answer;
+            console.log(questionsArr[questionNumber].answer);
+        if(radioBtns[entry[1].match(/(\d+)/)[0]-1].innerText==questionsArr[questionNumber].answer){
+            previousAnswer=questionsArr[questionNumber].answer;
             score++;
         } else {
-            previousAnswer=questionsQuiz1[questionNumber].options[entry[1].match(/(\d+)/)[0]-1];
+            previousAnswer=questionsArr[questionNumber].options[entry[1].match(/(\d+)/)[0]-1];
         }
         
 
         console.log("inside nonfinale");
         
         
-        if (typeof questionsQuiz1[questionNumber+1].question!==undefined){
+        if (typeof questionsArr[questionNumber+1].question!==undefined){
             console.log("Inside inside");
             questionNumber++;
-            questionCount.innerText=questionNumber+1;
-            questionSlot.innerText = questionsQuiz1[questionNumber].question;
+            questionCount.innerText="#" + (questionNumber+1) ;
+            questionSlot.innerText = questionsArr[questionNumber].question;
             j=Math.floor(Math.random() * 4); 
             for(let i=0; i<4;i++){
                 
                 if(i!=3){
-                    radioBtns[j%4].innerText=questionsQuiz1[questionNumber].options[i];
+                    radioBtns[j%4].innerText=questionsArr[questionNumber].options[i];
                     j++;
                     console.log("Branch 1");
                     
                 } else {
-                    radioBtns[j%4].innerText=questionsQuiz1[questionNumber].answer;
+                    radioBtns[j%4].innerText=questionsArr[questionNumber].answer;
                     console.log("Branch 2");
                     j++;
             
@@ -215,7 +246,7 @@ function init(event){
     
 
     }
-    log.innerText = score;
+    // log.innerText = score;
 
     console.log(score);
     // event.preventDefault();
@@ -256,23 +287,40 @@ form.addEventListener(
 
 //initializes the default values:
 
-questionCount.innerText=1;
-questionSlot.innerText= questionsQuiz1[questionNumber].question;
+//
 
-j=Math.floor(Math.random() * 4); 
-    for(let i=0; i<4;i++){
-        
-        if(i!=3){
-            radioBtns[j%4].innerText=questionsQuiz1[questionNumber].options[i];
-            j++;
-            console.log("Branch 1");
-            
-        } else {
-            radioBtns[j%4].innerText=questionsQuiz1[questionNumber].answer;
-              console.log("Branch 2");
-            j++;
-           }
+window.onload = function() {
+    
+    if (window.location.pathname === "/quiz1.html") {
+        questionsArr = questionsQuiz1;
+    } else if (window.location.pathname === "/quiz2.html") {
+        questionsArr = questionsQuiz2;
     }
+        console.log(questionsArr);
+        // Your JavaScript code to execute on this specific page
+        questionCount.innerText="#1";
+        questionSlot.innerText= questionsArr[questionNumber].question;
+
+        j=Math.floor(Math.random() * 4); 
+            for(let i=0; i<4;i++){
+                
+                if(i!=3){
+                    radioBtns[j%4].innerText=questionsArr[questionNumber].options[i];
+                    j++;
+                    console.log("Branch 1");
+                    
+                } else {
+                    radioBtns[j%4].innerText=questionsArr[questionNumber].answer;
+                    console.log("Branch 2");
+                    j++;
+                }
+            }
+        console.log("This code runs only on /your-specific-page.html");
+
+        
+};
+
+
 
 
 
