@@ -364,6 +364,8 @@ window.onload = function() {
 
   // INITIALIZE AND REPLACE HTML ON FIRST LOADING.
 
+  log.innerText="Inside onload";
+
     if (window.location.pathname === "/quiz1.html" || window.location.pathname === "/quiz2.html"){
         if (window.location.pathname === "/quiz1.html") {
             questionsArr = questionsQuiz1;
