@@ -20,6 +20,10 @@ let finished=false;
 let j;
 var questionsArr = [];
 var tryQuiz=0;
+var darkMode=false;
+
+
+var elementBdy = document.body;
 
 const nextAudio = document.getElementById("nextAudio");
 const prevAudio = document.getElementById("prevAudio");
@@ -72,23 +76,12 @@ function init(event){
                 }, 1); // Slight delay to trigger transition
             });
         j=Math.floor(Math.random() * 4); 
-            for(let i=0; i<4;i++){
-                
+            for(let i=0; i<4;i++){   
                 if(i!=3){
-
-                    //animate
-                    
-
                     radioBtns[j%4].innerText=questionsArr[questionNumber].options[i];
-                    
-                    j++;
-                    
+                    j++;   
                 } else {
-                    //animate
-                                    
-                    
                     radioBtns[j%4].innerText=questionsArr[questionNumber].answer;
-
                     j++;
            }
       } 
@@ -114,25 +107,15 @@ function init(event){
         fadeInRadio();
         fadeinQuiz();
         if(i!=3){
-            //animate
-
             radioBtns[j%4].innerText=questionsArr[questionNumber].options[i];
-
             j++;
-            
         } else {
-            //animate
-
             radioBtns[j%4].innerText=questionsArr[questionNumber].answer;
-
             j++;
            }
-        // log.innerText = score;
-    }
-        
-    } 
-    
-    else if(finished && event.submitter.id=="proceedButton") {
+    }    
+
+    }  else if(finished && event.submitter.id=="proceedButton") {
         //redirect page  
         window.location.href = `quiz${tryQuiz}.html`;
 
@@ -168,9 +151,8 @@ function init(event){
             finished=true;
             proceedButton.innerText=`Try Quizz ${tryQuiz}?`;
             
-        } else if( questionNumber<(questionsArr.length-1)){                                                        //OTHERWISE NOT END
-            
-        
+        } else if( questionNumber<(questionsArr.length-1)){                                  //OTHERWISE NOT END
+
         //GET THE INDEX OF PRESSED RADIO BUTTON
 
         const data = new FormData(form);
@@ -214,7 +196,6 @@ function init(event){
     }
 }
 
-
 const form = document.querySelector("form");
 const log = document.querySelector("#log");
 
@@ -251,8 +232,6 @@ window.onload = function() {
         fadeInRadio();
             
         fadeinQuiz();
-       
-        
 
         console.log(radioBtns);
 
@@ -293,21 +272,25 @@ let toggleBtn= document.getElementById("toggleButton");
 toggleBtn.addEventListener('click', toggleD);
 
 function toggleD() {
-  var element = document.body;
-  element.classList.toggle("dark-mode");
+  var elementBdy = document.body;
+  elementBdy.classList.toggle("dark-mode");
   let currentBGC= document.getElementsByClassName("navbar")[0].style.backgroundColor
   console.log("Background color is: " + currentBGC);
-
-  if(currentBGC=="white"||currentBGC==""||currentBGC=="rgb(247, 245, 245)" ){
-    console.log("inside if");
+  const darkMode = localStorage.getItem("darkMode");
+  if(darkMode=="false"){
+    console.log("inside if 1 toggleD");
+    
     document.getElementsByClassName("navbar")[0].style.setProperty('background-color', '#262626', 'important');
     document.getElementsByTagName("a")[0].style.setProperty('color', 'white', 'important');
     document.getElementsByTagName("a")[1].style.setProperty('color', 'white', 'important');
     document.getElementsByTagName("a")[2].style.setProperty('color', 'white', 'important');
     document.getElementsByTagName("a")[3].style.setProperty('color', 'white', 'important');
     document.getElementsByClassName("card-body")[0].style.setProperty('background-color', 'grey', 'important');
-    // document.getElementsByClassName("card-body")[1].style.setProperty('background-color', 'grey', 'important');
-
+    document.getElementsByClassName("card-body")[0].style.setProperty('color', 'white', 'important');   
+    if(document.getElementsByClassName("card-body")[1]){
+        document.getElementsByClassName("card-body")[1].style.setProperty('background-color', 'grey', 'important');
+        document.getElementsByClassName("card-body")[1].style.setProperty('color', 'white', 'important');  
+    }
     document.getElementById("proceedButton").style.setProperty('color', 'white', 'important');
     document.getElementById("proceedButton").style.setProperty('background-color', "grey", 'important');
     document.getElementById("proceedButton").style.setProperty('border', "1px black solid", 'important');
@@ -315,17 +298,24 @@ function toggleD() {
     document.getElementById("prevButton").style.setProperty('color', 'white', 'important');
     document.getElementById("prevButton").style.setProperty('background-color', "grey", 'important');
     document.getElementById("prevButton").style.setProperty('border', "1px black solid", 'important');
+    localStorage.setItem("darkMode", true);
+    console.log("Darkmode value is: " + localStorage.getItem("darkMode"));
   } else {
-    console.log("inside if 2")
-    document.getElementsByClassName("navbar")[0].style.setProperty('background-color', '#f7f5f5', 'important');
+    console.log("inside if 2 toggleD")
+    localStorage.setItem("darkMode", false);
+    console.log("Darkmode value is: " + darkMode);
+    document.getElementsByClassName("navbar")[0].style.setProperty('background-color', 'white', 'important');
     document.getElementsByTagName("a")[0].style.setProperty('color', 'black', 'important');
     document.getElementsByTagName("a")[1].style.setProperty('color', 'black', 'important');
     document.getElementsByTagName("a")[2].style.setProperty('color', 'black', 'important');
     document.getElementsByTagName("a")[3].style.setProperty('color', 'black', 'important');
     document.getElementsByClassName("card-body")[0].style.setProperty('background-color', 'white', 'important'); 
     document.getElementsByClassName("card-body")[0].style.setProperty('color', 'black', 'important');   
-    // document.getElementsByClassName("card-body")[1].style.setProperty('background-color', 'grey', 'important');
-
+    if(document.getElementsByClassName("card-body")[1]){
+        document.getElementsByClassName("card-body")[1].style.setProperty('background-color', 'white', 'important');
+        document.getElementsByClassName("card-body")[1].style.setProperty('color', 'black', 'important'); 
+    }
+    
     document.getElementById("proceedButton").style.setProperty('color', 'black', 'important');
     document.getElementById("proceedButton").style.setProperty('background-color', "white", 'important');
     document.getElementById("proceedButton").style.setProperty('border', "1px black solid", 'important');
@@ -336,20 +326,58 @@ function toggleD() {
   }
 }
 
-// document.getElementById("theme_change").onclick = function () {
-// if (document.body.style.backgroundColor == "#000") {
-//         document.body.style.backgroundColor = "#f5deb3";
-//         document.getElementsByTagName("a")[0].style.color = "#000";
-//         document.getElementsByTagName("a")[0].style.borderColor = "#000";
-//         document.getElementsByTagName("a")[1].style.color = "#000";
-//         document.getElementsByTagName("a")[1].style.borderColor = "#000";
-//         document.getElementById("theme_change").innerText = "Light Theme";
-//     } else if (document.body.style.backgroundColor = "#f5deb3") {
-//         document.body.style.backgroundColor == "#000";
-//         document.getElementsByTagName("a")[0].style.color = "#f5deb3";
-//         document.getElementsByTagName("a")[0].style.borderColor = "#f5deb3";
-//         document.getElementsByTagName("a")[1].style.color = "#f5deb3";
-//         document.getElementsByTagName("a")[1].style.borderColor = "#f5deb3";
-//         document.getElementById("theme_change").innerText = "Dark Theme";
 
-// }
+
+//on.load apply appropriate theme:
+window.onload = function() {
+    const darkMode = localStorage.getItem("darkMode");
+    console.log("Darkmode value is: " + darkMode);
+    if(darkMode=="true"){
+        //below is dark mode
+        console.log("Onload if 1 and darkmode is: " + darkMode);
+        elementBdy.classList.add("dark-mode");
+        document.getElementsByClassName("navbar")[0].style.setProperty('background-color', '#262626', 'important');
+        document.getElementsByTagName("a")[0].style.setProperty('color', 'white', 'important');
+        document.getElementsByTagName("a")[1].style.setProperty('color', 'white', 'important');
+        document.getElementsByTagName("a")[2].style.setProperty('color', 'white', 'important');
+        document.getElementsByTagName("a")[3].style.setProperty('color', 'white', 'important');
+        document.getElementsByClassName("card-body")[0].style.setProperty('background-color', 'grey', 'important');
+        document.getElementsByClassName("card-body")[0].style.setProperty('color', 'white', 'important');   
+        if(document.getElementsByClassName("card-body")[1]){
+            document.getElementsByClassName("card-body")[1].style.setProperty('background-color', 'grey', 'important');
+            document.getElementsByClassName("card-body")[1].style.setProperty('color', 'white', 'important');  
+        }
+        document.getElementById("proceedButton").style.setProperty('color', 'white', 'important');
+        document.getElementById("proceedButton").style.setProperty('background-color', "grey", 'important');
+        document.getElementById("proceedButton").style.setProperty('border', "1px black solid", 'important');
+
+        document.getElementById("prevButton").style.setProperty('color', 'white', 'important');
+        document.getElementById("prevButton").style.setProperty('background-color', "grey", 'important');
+        document.getElementById("prevButton").style.setProperty('border', "1px black solid", 'important');
+    } else {
+        console.log("inside if 2 and darkmode is " + darkMode);
+        document.getElementsByClassName("navbar")[0].style.setProperty('background-color', 'white', 'important');
+        document.getElementsByTagName("a")[0].style.setProperty('color', 'black', 'important');
+        document.getElementsByTagName("a")[1].style.setProperty('color', 'black', 'important');
+        document.getElementsByTagName("a")[2].style.setProperty('color', 'black', 'important');
+        document.getElementsByTagName("a")[3].style.setProperty('color', 'black', 'important');
+        document.getElementsByClassName("card-body")[0].style.setProperty('background-color', 'white', 'important'); 
+        document.getElementsByClassName("card-body")[0].style.setProperty('color', 'black', 'important');   
+        if(document.getElementsByClassName("card-body")[1]){
+            document.getElementsByClassName("card-body")[1].style.setProperty('background-color', 'white', 'important');
+            document.getElementsByClassName("card-body")[1].style.setProperty('color', 'black', 'important'); 
+        }
+        
+        document.getElementById("proceedButton").style.setProperty('color', 'black', 'important');
+        document.getElementById("proceedButton").style.setProperty('background-color', "white", 'important');
+        document.getElementById("proceedButton").style.setProperty('border', "1px black solid", 'important');
+
+        document.getElementById("prevButton").style.setProperty('color', 'black', 'important');
+        document.getElementById("prevButton").style.setProperty('background-color', "white", 'important');
+        document.getElementById("prevButton").style.setProperty('border', "1px black solid", 'important');
+  }
+    
+}
+
+console.log("Darkmode value is: " + localStorage.getItem("darkMode"));
+// currentModeCheck(); 
