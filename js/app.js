@@ -284,8 +284,11 @@ function displayRadio(){
 
 
 //ON PAGE LOAD
+setTimeout(() => {
 
-window.onload = function() {
+    console.log("What");
+
+    window.onload = function() {
     const darkMode = localStorage.getItem("darkMode");
     if (darkMode==undefined){
         localStorage.setItem("darkMode", false);
@@ -361,7 +364,6 @@ window.onload = function() {
         
   }
 
-
   // INITIALIZE AND REPLACE HTML ON FIRST LOADING.
 
   log.innerText="Inside onload";
@@ -382,6 +384,7 @@ window.onload = function() {
     }
     
 }
+    }, "1");
 
 
 
