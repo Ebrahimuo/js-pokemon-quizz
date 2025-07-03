@@ -372,18 +372,7 @@ window.onload = function() {
         }
             questionCount.innerText="#1";
             questionSlot.innerText= questionsArr[questionNumber].question;
-            j=Math.floor(Math.random() * 4); 
-                for(let i=0; i<4;i++){
-                    
-                    if(i!=3){
-                        radioBtns[j%4].innerText=questionsArr[questionNumber].options[i];
-                        j++;
-                        
-                    } else {
-                        radioBtns[j%4].innerText=questionsArr[questionNumber].answer;
-                        j++;
-                    }
-                }
+            displayRadio();
             fadeInRadio();
             fadeinQuiz();;
     }
