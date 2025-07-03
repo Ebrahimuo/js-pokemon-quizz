@@ -85,16 +85,8 @@ function init(event){
                 element.classList.add('visible');
                 }, 1); // Slight delay to trigger transition
             });
-        j=Math.floor(Math.random() * 4); 
-            for(let i=0; i<4;i++){   
-                if(i!=3){
-                    radioBtns[j%4].innerText=questionsArr[questionNumber].options[i];
-                    j++;   
-                } else {
-                    radioBtns[j%4].innerText=questionsArr[questionNumber].answer;
-                    j++;
-           }
-    } 
+        displayRadio();                                 //DISPLAYS RANDOM CHECK RADIO ELEMENTS
+   
             questionNumber++;
             radioWrap.style.display="block";
             prevButton.innerText="Previous!";
@@ -110,18 +102,7 @@ function init(event){
         questionNumber--;
         questionCount.innerText="#"+ (questionNumber+1) ;
          questionSlot.innerText = questionsArr[questionNumber].question;
-         for(let i=0; i<4;i++){
-        j=Math.floor(Math.random() * 4); 
-        fadeInRadio();
-        fadeinQuiz();
-        if(i!=3){
-            radioBtns[j%4].innerText=questionsArr[questionNumber].options[i];
-            j++;
-        } else {
-            radioBtns[j%4].innerText=questionsArr[questionNumber].answer;
-            j++;
-           }
-        }    
+         displayRadio();
 
     }  else {                                                //NEXT BUTTON PRESS OR FORM COMPLETION
        
@@ -154,7 +135,6 @@ function init(event){
             
         } else if( questionNumber<(questionsArr.length-1)){   //NORMAL NEXT PROCEEDURE
 
-
             //GET THE INDEX OF PRESSED RADIO BUTTON
             const data = new FormData(form);
             let output = "";
@@ -174,15 +154,7 @@ function init(event){
                 fadeInRadio();
                 fadeinQuiz();
                 animateTitle();
-                for(let i=0; i<4;i++){
-                    if(i!=3){
-                        radioBtns[j%4].innerText=questionsArr[questionNumber].options[i];
-                        j++;
-                    } else {
-                        radioBtns[j%4].innerText=questionsArr[questionNumber].answer;
-                        j++;
-                    }
-                }       
+                displayRadio();    
             } 
             }
         }
@@ -294,6 +266,20 @@ function toggleD() {
     localStorage.setItem("darkMode", false);
   }
 }
+
+function displayRadio(){
+    j=Math.floor(Math.random() * 4);
+    for(let i=0; i<4;i++){   
+                if(i!=3){
+                    radioBtns[j%4].innerText=questionsArr[questionNumber].options[i];
+                    j++;   
+                } else {
+                    radioBtns[j%4].innerText=questionsArr[questionNumber].answer;
+                    j++;
+           }
+    }
+}
+
 
 //ON PAGE LOAD
 
