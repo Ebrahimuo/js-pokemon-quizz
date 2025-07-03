@@ -66,9 +66,11 @@ form.addEventListener("submit", init,  false);
 function init(event){
     event.preventDefault(); //ALLOWS the final page to work.
 
+    log.innerText="Inside init at the begnning";
+
     if(finished && event.submitter.id=="proceedButton") {            //FINISHED AND PROCEED ARE PRESSED
         //redirect page  
-        window.location.href = `quiz${tryQuiz}.html`;
+        window.location.href = `.\\quiz${tryQuiz}.html`;
 
     } else if(finished&& event.submitter.id=="prevButton"){           //RESTART IS PRESSED
         newGame=true;
