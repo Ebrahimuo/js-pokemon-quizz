@@ -1,6 +1,6 @@
 # Pokemon Quizz Game
 
-![Game Screenshot]("./assets/screenshot 1.png")
+[Game Screenshot]("./assets/screenshot 1.png")
 
 ## 🕹️ Description
 
