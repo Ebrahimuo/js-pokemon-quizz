@@ -23,6 +23,8 @@ var tryQuiz=0;
 var darkMode=false;
 
 
+let turnToggle =0;
+
 var elementBdy = document.body;
 
 const nextAudio = document.getElementById("nextAudio");
@@ -49,6 +51,9 @@ let proceedButton = document.getElementById("proceedButton");
 let answerText = document.getElementById("answerText");
 
 let quizLayout = document.getElementById("quizLayout");
+
+
+let quizzPlayBtns = document.getElementsByClassName("quizzPlayBtns") ;
 
 /*-------------- FUNCTIONS -------------*/
 
@@ -199,43 +204,13 @@ function init(event){
 const form = document.querySelector("form");
 const log = document.querySelector("#log");
 
-if(window.location.pathname !== "/index.html") {
+if(form ) {
 form.addEventListener("submit", init,  false);
 }
 
 // ON LOAD INITIALIZATION
 
-window.onload = function() {
-    
-    if (window.location.pathname === "/quiz1.html") {
-        questionsArr = questionsQuiz1;
-        tryQuiz=2;
-    } else if (window.location.pathname === "/quiz2.html") {
-        questionsArr = questionsQuiz2;
-        tryQuiz=1;
-    }
-        questionCount.innerText="#1";
-        questionSlot.innerText= questionsArr[questionNumber].question;
-            
-        j=Math.floor(Math.random() * 4); 
-            for(let i=0; i<4;i++){
-                
-                if(i!=3){
-                    radioBtns[j%4].innerText=questionsArr[questionNumber].options[i];
-                    j++;
-                    
-                } else {
-                    radioBtns[j%4].innerText=questionsArr[questionNumber].answer;
-                    j++;
-                }
-            }
-        fadeInRadio();
-            
-        fadeinQuiz();
 
-        console.log(radioBtns);
-
-        }
 
 
 function fadeInRadio(){
@@ -277,6 +252,7 @@ function toggleD() {
   let currentBGC= document.getElementsByClassName("navbar")[0].style.backgroundColor
   console.log("Background color is: " + currentBGC);
   const darkMode = localStorage.getItem("darkMode");
+  
   if(darkMode=="false"){
     console.log("inside if 1 toggleD");
     
@@ -291,19 +267,32 @@ function toggleD() {
         document.getElementsByClassName("card-body")[1].style.setProperty('background-color', 'grey', 'important');
         document.getElementsByClassName("card-body")[1].style.setProperty('color', 'white', 'important');  
     }
-    document.getElementById("proceedButton").style.setProperty('color', 'white', 'important');
-    document.getElementById("proceedButton").style.setProperty('background-color', "grey", 'important');
-    document.getElementById("proceedButton").style.setProperty('border', "1px black solid", 'important');
+    if(proceedButton){
+        proceedButton.style.setProperty('color', 'white', 'important');
+        proceedButton.style.setProperty('background-color', "#9e9e9e", 'important');
+        proceedButton.style.setProperty('border', "1px black solid", 'important');
+    }
 
-    document.getElementById("prevButton").style.setProperty('color', 'white', 'important');
-    document.getElementById("prevButton").style.setProperty('background-color', "grey", 'important');
-    document.getElementById("prevButton").style.setProperty('border', "1px black solid", 'important');
+    
+    if (quizzPlayBtns[0]) {
+        quizzPlayBtns[0].style.setProperty('background-color', "#9e9e9e", 'important');
+         quizzPlayBtns[0].style.setProperty('border', "1px black solid", 'important');
+        quizzPlayBtns[1].style.setProperty('background-color', "#9e9e9e", 'important');
+         quizzPlayBtns[1].style.setProperty('border', "1px black solid", 'important');
+    }
+
+    if(prevButton) {
+        prevButton.style.setProperty('color', 'white', 'important');
+        prevButton.style.setProperty('background-color', "#9e9e9e", 'important');
+        prevButton.style.setProperty('border', "1px black solid", 'important');
+    }
+    
     localStorage.setItem("darkMode", true);
     console.log("Darkmode value is: " + localStorage.getItem("darkMode"));
+
   } else {
     console.log("inside if 2 toggleD")
-    localStorage.setItem("darkMode", false);
-    console.log("Darkmode value is: " + darkMode);
+    
     document.getElementsByClassName("navbar")[0].style.setProperty('background-color', 'white', 'important');
     document.getElementsByTagName("a")[0].style.setProperty('color', 'black', 'important');
     document.getElementsByTagName("a")[1].style.setProperty('color', 'black', 'important');
@@ -315,14 +304,29 @@ function toggleD() {
         document.getElementsByClassName("card-body")[1].style.setProperty('background-color', 'white', 'important');
         document.getElementsByClassName("card-body")[1].style.setProperty('color', 'black', 'important'); 
     }
-    
-    document.getElementById("proceedButton").style.setProperty('color', 'black', 'important');
-    document.getElementById("proceedButton").style.setProperty('background-color', "white", 'important');
-    document.getElementById("proceedButton").style.setProperty('border', "1px black solid", 'important');
+    if (quizzPlayBtns[0]) {
+        quizzPlayBtns[0].style.setProperty('background-color', "blue", 'important');
+         quizzPlayBtns[0].style.setProperty('border', "1px black solid", 'important');
+        quizzPlayBtns[1].style.setProperty('background-color', "blue", 'important');
+         quizzPlayBtns[1].style.setProperty('border', "1px black solid", 'important');
+    }
 
-    document.getElementById("prevButton").style.setProperty('color', 'black', 'important');
-    document.getElementById("prevButton").style.setProperty('background-color', "white", 'important');
-    document.getElementById("prevButton").style.setProperty('border', "1px black solid", 'important');
+    if(proceedButton){
+            proceedButton.style.setProperty('color', 'white', 'important');
+            proceedButton.style.setProperty('background-color', "blue", 'important');
+            proceedButton.style.setProperty('border', "1px black solid", 'important');
+        }
+
+        if(prevButton){
+            prevButton.style.setProperty('color', 'white', 'important');
+            prevButton.style.setProperty('background-color', "blue", 'important');
+            prevButton.style.setProperty('border', "1px black solid", 'important');
+
+        }
+    
+
+    localStorage.setItem("darkMode", false);
+    console.log("Darkmode value is: " + darkMode);
   }
 }
 
@@ -332,6 +336,11 @@ function toggleD() {
 window.onload = function() {
     const darkMode = localStorage.getItem("darkMode");
     console.log("Darkmode value is: " + darkMode);
+
+    if (darkMode==undefined){
+        localStorage.setItem("darkMode", false);
+    }
+
     if(darkMode=="true"){
         //below is dark mode
         console.log("Onload if 1 and darkmode is: " + darkMode);
@@ -347,15 +356,29 @@ window.onload = function() {
             document.getElementsByClassName("card-body")[1].style.setProperty('background-color', 'grey', 'important');
             document.getElementsByClassName("card-body")[1].style.setProperty('color', 'white', 'important');  
         }
-        document.getElementById("proceedButton").style.setProperty('color', 'white', 'important');
-        document.getElementById("proceedButton").style.setProperty('background-color', "grey", 'important');
-        document.getElementById("proceedButton").style.setProperty('border', "1px black solid", 'important');
+        if(proceedButton){
+            proceedButton.style.setProperty('color', 'white', 'important');
+            proceedButton.style.setProperty('background-color', "#9e9e9e", 'important');
+            proceedButton.style.setProperty('border', "1px black solid", 'important');
+        } 
+        
+        if(prevButton){
+            prevButton.style.setProperty('color', 'white', 'important');
+            prevButton.style.setProperty('background-color', "#9e9e9e", 'important');
+            prevButton.style.setProperty('border', "1px black solid", 'important');
+        }
 
-        document.getElementById("prevButton").style.setProperty('color', 'white', 'important');
-        document.getElementById("prevButton").style.setProperty('background-color', "grey", 'important');
-        document.getElementById("prevButton").style.setProperty('border', "1px black solid", 'important');
+        if (quizzPlayBtns[0]) {
+        quizzPlayBtns[0].style.setProperty('background-color', "#9e9e9e", 'important');
+         quizzPlayBtns[0].style.setProperty('border', "1px black solid", 'important');
+        quizzPlayBtns[1].style.setProperty('background-color', "#9e9e9e", 'important');
+         quizzPlayBtns[1].style.setProperty('border', "1px black solid", 'important');
+    }
+
+        
     } else {
         console.log("inside if 2 and darkmode is " + darkMode);
+        elementBdy.classList.remove("dark-mode");
         document.getElementsByClassName("navbar")[0].style.setProperty('background-color', 'white', 'important');
         document.getElementsByTagName("a")[0].style.setProperty('color', 'black', 'important');
         document.getElementsByTagName("a")[1].style.setProperty('color', 'black', 'important');
@@ -368,16 +391,62 @@ window.onload = function() {
             document.getElementsByClassName("card-body")[1].style.setProperty('color', 'black', 'important'); 
         }
         
-        document.getElementById("proceedButton").style.setProperty('color', 'black', 'important');
-        document.getElementById("proceedButton").style.setProperty('background-color', "white", 'important');
-        document.getElementById("proceedButton").style.setProperty('border', "1px black solid", 'important');
+        if(proceedButton){
+            proceedButton.style.setProperty('color', 'white', 'important');
+            proceedButton.style.setProperty('background-color', "blue", 'important');
+            proceedButton.style.setProperty('border', "1px black solid", 'important');
+        }
 
-        document.getElementById("prevButton").style.setProperty('color', 'black', 'important');
-        document.getElementById("prevButton").style.setProperty('background-color', "white", 'important');
-        document.getElementById("prevButton").style.setProperty('border', "1px black solid", 'important');
+        if(prevButton){
+            prevButton.style.setProperty('color', 'white', 'important');
+            prevButton.style.setProperty('background-color', "blue", 'important');
+            prevButton.style.setProperty('border', "1px black solid", 'important');
+
+        }
+
+        if (quizzPlayBtns[0]) {
+        quizzPlayBtns[0].style.setProperty('background-color', "blue", 'important');
+         quizzPlayBtns[0].style.setProperty('border', "1px black solid", 'important');
+        quizzPlayBtns[1].style.setProperty('background-color', "blue", 'important');
+         quizzPlayBtns[1].style.setProperty('border', "1px black solid", 'important');
+    }
+        
   }
+
+
+  //
+
+     if (window.location.pathname === "/quiz1.html") {
+        questionsArr = questionsQuiz1;
+        tryQuiz=2;
+    } else if (window.location.pathname === "/quiz2.html") {
+        questionsArr = questionsQuiz2;
+        tryQuiz=1;
+    }
+        questionCount.innerText="#1";
+        questionSlot.innerText= questionsArr[questionNumber].question;
+            
+        j=Math.floor(Math.random() * 4); 
+            for(let i=0; i<4;i++){
+                
+                if(i!=3){
+                    radioBtns[j%4].innerText=questionsArr[questionNumber].options[i];
+                    j++;
+                    
+                } else {
+                    radioBtns[j%4].innerText=questionsArr[questionNumber].answer;
+                    j++;
+                }
+            }
+        fadeInRadio();
+            
+        fadeinQuiz();
+
+        console.log(radioBtns);
     
 }
 
 console.log("Darkmode value is: " + localStorage.getItem("darkMode"));
+
+
 // currentModeCheck(); 
