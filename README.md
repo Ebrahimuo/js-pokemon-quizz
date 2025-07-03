@@ -1,6 +1,7 @@
 # Pokemon Quizz Game
 
-[Game Screenshot]("./assets/screenshot 1.png")
+<img src="https://github.com/Ebrahimuo/js-pokemon-quizz/blob/main/img/Screenshot%201.png" width="200" />
+<img src="https://github.com/Ebrahimuo/js-pokemon-quizz/blob/main/img/Screenshot%202.png" width="200" />
 
 ## 🕹️ Description
 
