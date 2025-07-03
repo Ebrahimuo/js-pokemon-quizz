@@ -385,3 +385,6 @@ window.onload = function() {
 
 
 
+window.addEventListener("load", function (event) {
+  console.log("Page is fully loaded");
+});
