@@ -66,7 +66,7 @@ form.addEventListener("submit", init,  false);
 function init(event){
     event.preventDefault(); //ALLOWS the final page to work.
 
-    log.innerText="Inside init at the begnning";
+    //log.innerText="Inside init at the begnning";
 
     if(finished && event.submitter.id=="proceedButton") {            //FINISHED AND PROCEED ARE PRESSED
         //redirect page  
@@ -366,7 +366,7 @@ setTimeout(() => {
 
   // INITIALIZE AND REPLACE HTML ON FIRST LOADING.
 
-  log.innerText="Inside onload";
+  //log.innerText="Inside onload";
 
     if (window.location.pathname === "/quiz1.html" || window.location.pathname === "/quiz2.html"){
         if (window.location.pathname === "/quiz1.html") {
