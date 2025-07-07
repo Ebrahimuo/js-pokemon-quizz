@@ -8,7 +8,7 @@
 
 /*-------------- CONS -------------*/
 
-import {questionsQuiz1,  questionsQuiz2} from "/js/dataFile.js";
+import {questionsQuiz1,  questionsQuiz2} from "./js/dataFile.js";
 
 /*---------- VARS ---------*/
 
