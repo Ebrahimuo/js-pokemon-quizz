@@ -11,7 +11,7 @@ The game finds the score of the answered quizz and is displayed at the end.
 
 ## 🚀 Getting Started
 
-👉 **Play it here:** [https://your-deployment-link.com](https://your-deployment-link.com)
+👉 **Play it here:** [https://ebrahimuo.github.io/js-pokemon-quizz/]([https://your-deployment-link.com](https://ebrahimuo.github.io/js-pokemon-quizz/))
 
 👉 **Planning Materials:**
 - [User Stories & Trello Board](https://trello.com/b/NoOcqn3J/quiz-game)
